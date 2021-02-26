@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "354230384083",
+    "project_id": "red-circle-52b04",
+    "storage_bucket": "red-circle-52b04.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:354230384083:android:39881ec8ef22ade2892b26",
+        "android_client_info": {
+          "package_name": "com.example.redcircle"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "354230384083-8no7nv56nsvpq0rstkn5nm7t8ln19ilu.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDt9PCpOdvFdckS3d2AztsbKvdU8WoPSP0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "354230384083-8no7nv56nsvpq0rstkn5nm7t8ln19ilu.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
