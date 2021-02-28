@@ -5,13 +5,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="20dp"
-    tools:context=".RegisterActivity">
+    tools:context=".LoginActivity">
 
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Register"
+        android:text="Login"
         android:textAlignment="center"
         android:textColor="@color/red"
         android:textSize="25sp"
@@ -51,19 +51,19 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="REGISTER"
+        android:text="LOGIN"
         android:layout_centerHorizontal="true"
         android:layout_below="@id/passwordTIL"
-        android:id="@+id/register_btn"
+        android:id="@+id/login_btn"
         android:layout_marginTop="20dp" />
     <TextView
-        android:id="@+id/haveAccountTv"
+        android:id="@+id/notHaveAccountTv"
         android:textColor="@color/red"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Already have a account? Let's login"
+        android:text="Not have a account? Let's register"
         android:textAlignment="center"
-        android:layout_below="@id/register_btn"
+        android:layout_below="@id/login_btn"
         android:layout_marginTop="20dp"
         android:gravity="center_horizontal" />
 

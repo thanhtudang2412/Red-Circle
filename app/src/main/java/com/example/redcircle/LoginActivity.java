@@ -21,79 +21,75 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-import java.util.regex.Pattern;
-
-public class RegisterActivity extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity {
 
     EditText mEmailEt, mPasswordEt;
-    Button mRegisterBtn;
-    ProgressDialog progressDialog;
-    TextView mHaveAccountTv;
+    TextView mNotHaveAccountTv;
+    Button mLoginBtn;
     private FirebaseAuth mAuth;
+    ProgressDialog progressDialog;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_register);
+        setContentView(R.layout.activity_login);
         ActionBar actionBar = getSupportActionBar();
-        actionBar.setTitle("Create Account");
+        actionBar.setTitle("Login");
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setDisplayShowHomeEnabled(true);
-        progressDialog = new ProgressDialog(this);
-        progressDialog.setMessage("Registering user...");
+
+        mAuth = FirebaseAuth.getInstance();
         mEmailEt = findViewById(R.id.emailEt);
         mPasswordEt = findViewById(R.id.passwordEt);
-        mRegisterBtn = findViewById(R.id.register_btn);
-        mHaveAccountTv = findViewById(R.id.haveAccountTv);
-        mAuth = FirebaseAuth.getInstance();
-        mRegisterBtn.setOnClickListener(new View.OnClickListener() {
+        mLoginBtn = findViewById(R.id.login_btn);
+        mNotHaveAccountTv = findViewById(R.id.haveAccountTv);
+        mLoginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String email = mEmailEt.getText().toString().trim();
-                String password = mPasswordEt.getText().toString().trim();
+                String email = mEmailEt.toString();
+                String password = mPasswordEt.toString();
                 if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
                     mEmailEt.setError("Invalid email");
                     mEmailEt.setFocusable(true);
-                }else if (password.length()<8){
-                    mPasswordEt.setError("Password length at least 8 characters");
-                    mPasswordEt.setFocusable(true);
                 }else {
-                    registerUser(email, password);
+                    loginUser(email, password);
                 }
+
             }
         });
-        mHaveAccountTv.setOnClickListener(new View.OnClickListener() {
+
+        mNotHaveAccountTv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
+                startActivity(new Intent(LoginActivity.this, RegisterActivity.class));
             }
         });
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setMessage("Logging...");
+
     }
 
-    private void registerUser(String email, String password) {
-        progressDialog.show();
-        mAuth.createUserWithEmailAndPassword(email, password)
+    private void loginUser(String email, String password) {
+        mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
+                        if (task.isSuccessful()){
                             progressDialog.dismiss();
                             FirebaseUser user = mAuth.getCurrentUser();
-                            Toast.makeText(RegisterActivity.this,"Registered \n"+user.getEmail().toString(),Toast.LENGTH_LONG).show();
-                            startActivity(new Intent(RegisterActivity.this, ProfileActivity.class));
+                            startActivity(new Intent(LoginActivity.this, ProfileActivity.class));
                             finish();
-                        } else {
+                        }else {
                             progressDialog.dismiss();
-                            Toast.makeText(RegisterActivity.this, "Authentication failed.", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(LoginActivity.this, "Authentication failed!",Toast.LENGTH_SHORT).show();
                         }
                     }
                 }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
-                progressDialog.dismiss();
-                Toast.makeText(RegisterActivity.this,""+e.getMessage(),Toast.LENGTH_LONG).show();
+                Toast.makeText(LoginActivity.this, ""+e.getMessage(), Toast.LENGTH_LONG).show();
             }
-        })
-        ;
+        });
     }
 
     @Override
