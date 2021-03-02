@@ -39,15 +39,16 @@ public class LoginActivity extends AppCompatActivity {
         actionBar.setDisplayShowHomeEnabled(true);
 
         mAuth = FirebaseAuth.getInstance();
-        mEmailEt = findViewById(R.id.emailEt);
-        mPasswordEt = findViewById(R.id.passwordEt);
+        mEmailEt = findViewById(R.id.emailLoginEt);
+        mPasswordEt = findViewById(R.id.passwordLoginEt);
         mLoginBtn = findViewById(R.id.login_btn);
-        mNotHaveAccountTv = findViewById(R.id.haveAccountTv);
+        mNotHaveAccountTv = findViewById(R.id.notHaveAccountTv);
         mLoginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String email = mEmailEt.toString();
-                String password = mPasswordEt.toString();
+
+                String email = mEmailEt.getText().toString().trim();
+                String password = mPasswordEt.getText().toString().trim();
                 if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
                     mEmailEt.setError("Invalid email");
                     mEmailEt.setFocusable(true);
@@ -62,6 +63,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(LoginActivity.this, RegisterActivity.class));
+                finish();
             }
         });
         progressDialog = new ProgressDialog(this);
@@ -87,6 +89,7 @@ public class LoginActivity extends AppCompatActivity {
                 }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
+                progressDialog.dismiss();
                 Toast.makeText(LoginActivity.this, ""+e.getMessage(), Toast.LENGTH_LONG).show();
             }
         });

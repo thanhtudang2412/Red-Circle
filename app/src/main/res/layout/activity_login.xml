@@ -24,7 +24,7 @@
         android:layout_centerVertical="true">
 
         <EditText
-            android:id="@+id/emailEt"
+            android:id="@+id/emailLoginEt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="#FFFFFF"
@@ -41,7 +41,7 @@
         app:passwordToggleEnabled="true">
 
         <EditText
-            android:id="@+id/passwordEt"
+            android:id="@+id/passwordLoginEt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="#FFFFFF"
