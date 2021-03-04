@@ -56,6 +56,14 @@
         android:layout_below="@id/passwordTIL"
         android:id="@+id/login_btn"
         android:layout_marginTop="20dp" />
+
+    <com.google.android.gms.common.SignInButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/signInBtn"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/recoverPassTv"/>
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
