@@ -173,7 +173,7 @@ public class LoginActivity extends AppCompatActivity {
                         if (task.isSuccessful()){
                             progressDialog.dismiss();
                             FirebaseUser user = mAuth.getCurrentUser();
-                            startActivity(new Intent(LoginActivity.this, ProfileActivity.class));
+                            startActivity(new Intent(LoginActivity.this, DashboardActivity.class));
                             finish();
                         }else {
                             progressDialog.dismiss();
@@ -233,7 +233,7 @@ public class LoginActivity extends AppCompatActivity {
                             DatabaseReference reference = database.getReference("Users");
                             reference.child(uid).setValue(hashMap);
                             Toast.makeText(LoginActivity.this, ""+user.getEmail().toString(),Toast.LENGTH_LONG).show();
-                            startActivity(new Intent(LoginActivity.this, ProfileActivity.class));
+                            startActivity(new Intent(LoginActivity.this, DashboardActivity.class));
                             finish();
                             //updateUI(user);
                         } else {
